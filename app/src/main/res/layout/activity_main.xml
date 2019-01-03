@@ -16,8 +16,7 @@
             android:layout_height="wrap_content"
             android:autoLink="all"
             android:lineSpacingMultiplier="1.5"
-            android:text="本应用使用相机进行识别中国二代身份证信息正反面 (OCR库还支持驾驶证、护照、军官证识别) 不需要联网即可离线识别，识别速度快，可保存识别时的图片，可以受权AAR包给第三方开发直接调用，有意联系QQ2227421573。"
-            android:textColor="@color/colorAccent"
+            android:text="本示例仅识别中国二代身份证信息正反面。技术支持：https://github.com/XieZhiFa/IdCardOCR"
             android:textIsSelectable="true"/>
 
         <Button
