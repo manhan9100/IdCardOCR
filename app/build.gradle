@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.tomcat.ocr.idcard"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                //OCR密钥
+                OCR_API_KEY: "d3118ef7687453346ab5f67516fb7cb5567950fb1a16470f"
+        ]
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    implementation project(':..:..:librarys:library_ocr')
+}
