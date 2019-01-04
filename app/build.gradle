@@ -39,11 +39,20 @@ android {
     dataBinding {
         enabled true
     }
+
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (outputFileName.endsWith('.apk')) {
+                outputFileName = "idcardOCR-demo-${defaultConfig.versionName}.apk"
+            }
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
-    implementation project(':..:..:librarys:library_ocr')
+    implementation project(':..:librarys:library_ocr')
 }

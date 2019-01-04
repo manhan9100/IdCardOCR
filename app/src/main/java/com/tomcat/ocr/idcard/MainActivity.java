@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.msd.ocr.idcard.LibraryInitOCR;
-import com.msd.ocr.idcard.id.ICVideoActivity;
 import com.tomcat.ocr.idcard.databinding.ActivityMainBinding;
 
 import org.json.JSONException;
@@ -31,17 +30,23 @@ public class MainActivity extends AppCompatActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ICVideoActivity.startScan(context);
+                //ICVideoActivity.startScan(context);
+
+
+                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
+                intent.putExtra("saveImage", false);    //是否保存图片
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
     }
 
 
+    private final int REQUEST_CODE = 1;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ICVideoActivity.REQUEST_CODE && resultCode == RESULT_OK){
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
 
             String result = data.getStringExtra("OCRResult");
             try {
@@ -64,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -1,2 +1,2 @@
 include ':app'
-include ':..:..:librarys:library_ocr'
+include ':..:librarys:library_ocr'
