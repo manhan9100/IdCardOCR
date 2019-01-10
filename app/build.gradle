@@ -7,12 +7,10 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionName "1.0.1"
 
         manifestPlaceholders = [
-                //OCR密钥
-                OCR_API_KEY: "d3118ef7687453346ab5f67516fb7cb5567950fb1a16470f"
+                "OCR_API_KEY" : "26f1f6a0d4d7cb0d3264d8c8b31211531"    //OCR密钥
         ]
 
         ndk {

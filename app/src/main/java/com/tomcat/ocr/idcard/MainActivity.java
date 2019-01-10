@@ -2,6 +2,7 @@ package com.tomcat.ocr.idcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,16 +31,39 @@ public class MainActivity extends AppCompatActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ICVideoActivity.startScan(context);
+//                ICVideoActivity.startScan(context, REQUEST_CODE, true);
 
 
+                boolean isSave = binding.tip.getVisibility() == View.GONE;
                 Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-                intent.putExtra("saveImage", false);    //是否保存图片
+                intent.putExtra("saveImage", isSave);    //是否保存图片
+                intent.addCategory(getPackageName());
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
+
+
+        binding.button.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                binding.tip.setVisibility(View.GONE);
+                return true;
+            }
+        });
+
+
     }
 
+
+    private Resources mResources;
+    @Override
+    public Resources getResources() {
+        if (mResources == null) {
+            mResources = new MyResources(this, super.getResources());
+        }
+        return mResources == null ? super.getResources() : mResources;
+    }
 
     private final int REQUEST_CODE = 1;
 
@@ -47,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
-
             String result = data.getStringExtra("OCRResult");
             try {
                 JSONObject jo = new JSONObject(result);
@@ -61,11 +84,9 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(String.format("住址 = %s\n", jo.opt("addr")));
                 sb.append(String.format("签发机关 = %s\n", jo.opt("issue")));
                 sb.append(String.format("有效期限 = %s\n", jo.opt("valid")));
-//                sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
-//                sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
-
+                //sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
+                //sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
                 binding.textview.setText(sb.toString());
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
