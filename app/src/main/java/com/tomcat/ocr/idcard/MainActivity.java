@@ -2,7 +2,6 @@ package com.tomcat.ocr.idcard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -53,16 +52,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-
-
-    private Resources mResources;
-    @Override
-    public Resources getResources() {
-        if (mResources == null) {
-            mResources = new MyResources(this, super.getResources());
-        }
-        return mResources == null ? super.getResources() : mResources;
     }
 
     private final int REQUEST_CODE = 1;
