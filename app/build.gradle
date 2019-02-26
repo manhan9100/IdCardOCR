@@ -10,7 +10,7 @@ android {
         versionName "1.0.1"
 
         manifestPlaceholders = [
-                "OCR_API_KEY" : "26f1f6a0d4d7cb0d3264d8c8b31211531"    //OCR密钥
+                "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    //OCR密钥
         ]
 
         ndk {
