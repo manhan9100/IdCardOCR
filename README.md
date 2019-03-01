@@ -2,12 +2,18 @@
 极速识别中国二代身份证(无需联网，离线秒扫，极速识别)
 本应用使用相机进行识别中国二代身份证信息正反面 (OCR库还支持驾驶证、护照、军官证) 不需要联网即可离线识别，识别速度快，识别率高, 可保存识别图片。
 
+![image](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/device-demo.png?raw=true)
+ 
+
 #### 调用方式
 	Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
 	intent.putExtra("saveImage", false);    //是否保存图片
 	startActivityForResult(intent, REQUEST_CODE);
 
+
 #### 返回结果
+![image](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/device-result.png?raw=true)
+
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -74,5 +80,9 @@
     applicationId、deubg keystore、release keystore 即开发版本及发布版 sha1 发给我。
     QQ 2227421573
 
+
+
+#### 身份证示例图
+![image](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/%E7%A4%BA%E4%BE%8B%E8%BA%AB%E4%BB%BD%E8%AF%81.png?raw=true)
 
 
