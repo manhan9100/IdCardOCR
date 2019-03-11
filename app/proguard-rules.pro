@@ -42,3 +42,4 @@
 -keep class com.ym.idcard.reg.** {*;}
 -keep class com.ym.ocr.img.** {*;}
 -keep class hotcard.doc.reader.** {*;}
+-keep class com.msd.ocr.idcard.LibraryInitOCR {*;}
