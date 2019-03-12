@@ -19,6 +19,7 @@ android {
     }
     buildTypes {
         release {
+            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -52,8 +53,12 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
+
+    //使用OCR aar包的情况下,图片选择需要依赖另外一个库
+    implementation 'com.squareup.picasso:picasso:2.4.0'
     implementation(name: 'library-multi-image-selector-1.0.5-SNAPSHOT', ext: 'aar')
     implementation(name: 'library-ocr-1.0.3-SNAPSHOT', ext: 'aar')
+
 
 //    implementation project(':..:librarys:library_ocr')
 }

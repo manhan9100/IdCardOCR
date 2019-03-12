@@ -4,8 +4,12 @@
 
 <img src='https://github.com/XieZhiFa/IdCardOCR/blob/master/image/device-demo.png?raw=true' width='800' alt='扫描示例'/>
  
+ 
+#### Application中初始化
+    LibraryInitOCR.initOCR(context);
 
-#### 调用方式
+
+#### 调用扫描界面
 	Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
 	intent.putExtra("saveImage", false);    //是否保存图片
 	startActivityForResult(intent, REQUEST_CODE);
@@ -53,7 +57,7 @@
         }
 
         manifestPlaceholders = [
-            "OCR_API_KEY" : ""    //OCR密钥请查看授权方式
+            "OCR_API_KEY" : ""    //OCR密钥联系QQ2227421573授权
         ]
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
@@ -66,19 +70,109 @@
     }
 
 
+#### 自定义识别框方式集成
+如果当前扫描界面无法满足,您可以自己开发相机预览界面,使用以下API进行识别. 
 
+    //1. Application中初始化
+    LibraryInitOCR.initOCR(context); 
+    
+    //2. 初始化解码器
+    /**
+     * 解码器初始化, 如果需要保存图片, 需要在调用向系统审核SDCard读写权限.
+     * @param context   Activity
+     * @param handler   接收解码消息
+     * @param isSaveImage   是否保存图片
+     */
+    public static void initDecode(Context context, Handler handler, boolean isSaveImage){
+        idCardDecode = new IDCardDecode(context, handler, isSaveImage);
+    }
+
+
+
+    //3. 开始解码
+    /**
+     * 开始解码, 将相机预览数据传递到这里来, onPreviewFrame(byte[] data, Camera camera)
+     * @param rect  预览框对象
+     * @param previewWidth  界面预览宽
+     * @param previewHeight 界面预览高
+     * @param data  相机预览数据
+     */
+    public static void decode(Rect rect, int previewWidth, int previewHeight, byte[] data){
+        idCardDecode.decode(rect, previewWidth, previewHeight, data);
+    }
+
+    
+    /**
+     * 识别选择的身份证图片(注意提前申请读写权限)
+     * @param filePath  文件路径
+     */
+    public static void decode(String filePath){
+        idCardDecode.decode(filePath);
+    }
+
+
+    //4.在Activity onDestroy 释放资源
+    /**
+     * 释放资源
+     */
+    public static void closeDecode(){
+        if(idCardDecode != null){
+            idCardDecode.close();
+            idCardDecode = null;
+        }
+    }
+    
+    
+    
+    //解码结果通过handler 接收
+    switch (msg.what){
+        //解码成功
+        case LibraryInitOCR.DECODE_SUCCESS: {
+            Intent intent = (Intent) msg.obj;
+            String result = intent.getStringExtra("OCRResult");
+            String headImg = intent.getStringExtra("headImg");
+            String fullImg = intent.getStringExtra("fullImg");
+            break;
+        }
+
+        //解码失败
+        case LibraryInitOCR.DECODE_FAIL:{
+            break;
+        }
+
+        //未授权
+        case LibraryInitOCR.DECODE_UNAUTHORIZED:{
+            break;
+        }
+
+        //提示重新聚焦
+        case LibraryInitOCR.DECODE_AUTO_FOCUS:{
+            break;
+        }
+    }
+    
+    
 
 #### 混淆排除
-    #在app/proguard-rules.pro 文件中增加以下混淆设置
+    #排除身份证识别库本地方法
     -keep class com.ym.idcard.reg.** {*;}
     -keep class com.ym.ocr.img.** {*;}
     -keep class hotcard.doc.reader.** {*;}
+    -keep class com.msd.ocr.idcard.LibraryInitOCR {*;}
+    
+    -keepclassmembers class * {
+        native <methods>;
+    }
+    -keepclasseswithmembernames class * {
+        native <methods>;
+    }
 
 
 
-#### 授权方式
-    applicationId、deubg keystore、release keystore 即开发版本及发布版 sha1 发给我。
-    QQ 2227421573
+
+#### 技术支持 QQ 2227421573
+    applicationId、deubg keystore、release keystore 开发版本及发布版 sha1 发给我。觉得好用的发个红包鼓励下。
+    
 
 
 
