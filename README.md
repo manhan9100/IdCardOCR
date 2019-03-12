@@ -83,9 +83,7 @@
      * @param handler   接收解码消息
      * @param isSaveImage   是否保存图片
      */
-    public static void initDecode(Context context, Handler handler, boolean isSaveImage){
-        idCardDecode = new IDCardDecode(context, handler, isSaveImage);
-    }
+    public static void initDecode(Context context, Handler handler, boolean isSaveImage)
 
 
 
@@ -97,30 +95,21 @@
      * @param previewHeight 界面预览高
      * @param data  相机预览数据
      */
-    public static void decode(Rect rect, int previewWidth, int previewHeight, byte[] data){
-        idCardDecode.decode(rect, previewWidth, previewHeight, data);
-    }
+    public static void decode(Rect rect, int previewWidth, int previewHeight, byte[] data)
 
     
     /**
      * 识别选择的身份证图片(注意提前申请读写权限)
      * @param filePath  文件路径
      */
-    public static void decode(String filePath){
-        idCardDecode.decode(filePath);
-    }
+    public static void decode(String filePath)
 
 
     //4.在Activity onDestroy 释放资源
     /**
      * 释放资源
      */
-    public static void closeDecode(){
-        if(idCardDecode != null){
-            idCardDecode.close();
-            idCardDecode = null;
-        }
-    }
+    public static void closeDecode()
     
     
     
