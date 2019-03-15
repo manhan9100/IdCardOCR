@@ -10,7 +10,7 @@
 
 
 #### 调用扫描界面
-    //如果您不已经集成了aar那么可以直接转跳到扫描界面
+    //如果您已经集成了aar那么可以直接转跳到扫描界面
     ICVideoActivity.startScan(context, REQUEST_CODE, false);
     
     
