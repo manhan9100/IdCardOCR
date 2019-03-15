@@ -10,9 +10,17 @@
 
 
 #### 调用扫描界面
+    //如果您不已经集成了aar那么可以直接转跳到扫描界面
+    ICVideoActivity.startScan(context, REQUEST_CODE, false);
+    
+    
+    //如果您不想集成aar,那么可以通过隐式意图拉起示例中的扫描界面
 	Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-	intent.putExtra("saveImage", false);    //是否保存图片
+	intent.putExtra("saveImage", false);            //是否保存图片
+	intent.addCategory("com.tomcat.ocr.idcard");
 	startActivityForResult(intent, REQUEST_CODE);
+	
+	//两种方式,返回的结果都是一样的.
 
 
 #### 返回结果
