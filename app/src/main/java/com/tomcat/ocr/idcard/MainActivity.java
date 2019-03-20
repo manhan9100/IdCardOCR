@@ -30,14 +30,20 @@ public class MainActivity extends AppCompatActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ICVideoActivity.startScan(context, REQUEST_CODE, true);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("saveImage", false);      //是否保存识别图片
+                bundle.putBoolean("showSelect", true);     //是否显示选择图片
+                bundle.putInt("requestCode", REQUEST_CODE); //requestCode
+                LibraryInitOCR.startScan(context, bundle);
 
 
-                boolean isSave = binding.tip.getVisibility() == View.GONE;
-                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-                intent.putExtra("saveImage", isSave);    //是否保存图片
-                intent.addCategory(getPackageName());
-                startActivityForResult(intent, REQUEST_CODE);
+////                隐式意图调用
+//                boolean isSave = binding.tip.getVisibility() == View.GONE;
+//                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
+//                intent.putExtra("saveImage", isSave);         //是否保存图片
+//                intent.putExtra("showSelect", true);    //是否保存图片
+//                intent.addCategory(getPackageName());               //调用demo中的扫描界面使用: com.tomcat.ocr.idcard
+//                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
