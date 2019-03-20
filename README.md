@@ -11,14 +11,20 @@
 
 #### 调用扫描界面
     //如果您已经集成了aar那么可以直接转跳到扫描界面
-    ICVideoActivity.startScan(context, REQUEST_CODE, false);
+    Bundle bundle = new Bundle();
+    bundle.putBoolean("saveImage", false);//是否保存识别图片
+    bundle.putBoolean("showSelect", true);//是否显示选择图片
+    bundle.putInt("requestCode", REQUEST_CODE);//requestCode
+    LibraryInitOCR.startScan(context, bundle);
     
     
     //如果您不想集成aar,那么可以通过隐式意图拉起示例中的扫描界面
-	Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-	intent.putExtra("saveImage", false);            //是否保存图片
-	intent.addCategory("com.tomcat.ocr.idcard");
-	startActivityForResult(intent, REQUEST_CODE);
+	boolean isSave = binding.tip.getVisibility() == View.GONE;
+    Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
+    intent.putExtra("saveImage", isSave);//是否保存图片
+    intent.putExtra("showSelect", true);//是否保存图片
+    intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
+    startActivityForResult(intent, REQUEST_CODE);
 	
 	//两种方式,返回的结果都是一样的.
 
