@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.saveImage1.setChecked(true);
         context = this;
 
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("saveImage", false);     //是否保存识别图片
+                bundle.putBoolean("saveImage", binding.saveImage1.isChecked());  //是否保存识别图片
                 bundle.putBoolean("showSelect", true);     //是否显示选择图片
                 bundle.putInt("requestCode", REQUEST_CODE); //requestCode
                 LibraryInitOCR.startScan(context, bundle);
