@@ -31,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                testFile();
-
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("saveImage", true);      //是否保存识别图片
+                bundle.putBoolean("saveImage", false);     //是否保存识别图片
                 bundle.putBoolean("showSelect", true);     //是否显示选择图片
                 bundle.putInt("requestCode", REQUEST_CODE); //requestCode
                 LibraryInitOCR.startScan(context, bundle);
