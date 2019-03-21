@@ -80,7 +80,12 @@
 
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
-        implementation (name: 'library-ocr-1.0.2-SNAPSHOT', ext: 'aar')
+        implementation (name: 'library-ocr-1.0.3-SNAPSHOT', ext: 'aar')
+        
+        //使用OCR aar包 图片选择需要依赖另外一个库
+        implementation 'com.squareup.picasso:picasso:2.4.0'
+        implementation(name: 'library-multi-image-selector-1.0.5-SNAPSHOT', ext: 'aar')
+        
     }
 
 

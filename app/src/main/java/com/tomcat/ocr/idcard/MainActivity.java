@@ -30,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                testFile();
+
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("saveImage", false);      //是否保存识别图片
+                bundle.putBoolean("saveImage", true);      //是否保存识别图片
                 bundle.putBoolean("showSelect", true);     //是否显示选择图片
                 bundle.putInt("requestCode", REQUEST_CODE); //requestCode
                 LibraryInitOCR.startScan(context, bundle);
@@ -79,12 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(String.format("住址 = %s\n", jo.opt("addr")));
                 sb.append(String.format("签发机关 = %s\n", jo.opt("issue")));
                 sb.append(String.format("有效期限 = %s\n", jo.opt("valid")));
-                //sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
-                //sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
+                sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
+                sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
                 binding.textview.setText(sb.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }
