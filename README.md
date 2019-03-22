@@ -26,7 +26,7 @@
     intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
     startActivityForResult(intent, REQUEST_CODE);
 	
-	//两种方式,返回的结果都是一样的.
+	//两种方式,返回的结果都是一样的. 但是选择图片的时候头像暂时不能提前.
 
 
 #### 返回结果
@@ -49,14 +49,15 @@
                 sb.append(String.format("住址 = %s\n", jo.opt("addr")));
                 sb.append(String.format("签发机关 = %s\n", jo.opt("issue")));
                 sb.append(String.format("有效期限 = %s\n", jo.opt("valid")));
-                //sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
-                //sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
+                sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
+                sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
                 textview.setText(sb.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 	    }
     }
+
 
 
 
@@ -71,7 +72,7 @@
         }
 
         manifestPlaceholders = [
-            "OCR_API_KEY" : ""    //OCR密钥联系QQ2227421573授权
+            "OCR_API_KEY" : ""    // license 查看技术支持
         ]
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
@@ -178,7 +179,7 @@
 
 
 
-#### 技术支持 QQ 2227421573
+#### 技术支持 QQ:2227421573 QQ群:192585477
     applicationId、deubg keystore、release keystore 开发版本及发布版 sha1 发给我。觉得好用的发个红包鼓励下。
     
 
