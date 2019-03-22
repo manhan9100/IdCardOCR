@@ -179,7 +179,7 @@
 
 
 
-#### 技术支持 QQ:2227421573 QQ群:192585477
+#### 技术支持 QQ:2227421573
     applicationId、deubg keystore、release keystore 开发版本及发布版 sha1 发给我。觉得好用的发个红包鼓励下。
     
 
