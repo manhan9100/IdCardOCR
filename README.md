@@ -72,7 +72,8 @@
         }
 
         manifestPlaceholders = [
-            "OCR_API_KEY" : ""    // license 查看技术支持
+            //debug.keystore生成, 正式包需要重新生成.
+            "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    
         ]
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
@@ -180,7 +181,7 @@
 
 
 #### 技术支持 QQ:2227421573
-    applicationId、deubg keystore、release keystore 开发版本及发布版 sha1 发给我。觉得好用的发个红包鼓励下。
+    导出正式包,需要将 applicationId、release keystore中的 sha1 发给我。觉得好用的发个红包鼓励下。
     
 
 
