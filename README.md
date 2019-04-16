@@ -182,11 +182,13 @@
 
 
 #### 技术支持 QQ:2227421573
-    正式授权需要支付500元/License (比起第三方API接口费用这不值一提了)费用主要用于维护此项目，本开发库没有任何使用和调用限制，如果您不愿意支付费用请不要加QQ
-    如果您运行了Demo效果及体验还满意, 请将applicationId及release keystore中的 sha1 发给我，我给你License。
+    正式授权需要支付500元/License (比起第三方API接口费用这不值一提了)费用主要用于维护此项目
+    本开发库没有任何使用和调用限制，如果您不愿意支付费用请不要加QQ，您可能直接使用 debug.keystore
+    对您的应用进行打包，如果您运行了Demo 体验及解码效果及还满意，请将applicationId及正式包sha1发给我，我给你License。
+    
     sha1 查看方式: 
     命令行进入签名文件所在的目录执行:
-    keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码
+    keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码 
     
 
 
