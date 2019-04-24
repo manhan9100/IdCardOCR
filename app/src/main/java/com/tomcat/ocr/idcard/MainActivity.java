@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.saveImage1.setChecked(true);
         context = this;
 
 
@@ -31,21 +30,12 @@ public class MainActivity extends AppCompatActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("saveImage", binding.saveImage1.isChecked());  //是否保存识别图片
-                bundle.putBoolean("showSelect", true);     //是否显示选择图片
-                bundle.putInt("requestCode", REQUEST_CODE); //requestCode
+                bundle.putBoolean("saveImage", binding.saveImage.getSelectedItemPosition() == 0 ? true : false); // 是否保存识别图片
+                bundle.putBoolean("showSelect", true);                          // 是否显示选择图片
+                bundle.putInt("requestCode", REQUEST_CODE);                     // requestCode
+                bundle.putInt("type", binding.type.getSelectedItemPosition());  // 0身份证, 1驾驶证
                 LibraryInitOCR.startScan(context, bundle);
-
-
-////                隐式意图调用
-//                boolean isSave = binding.tip.getVisibility() == View.GONE;
-//                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-//                intent.putExtra("saveImage", isSave);         //是否保存图片
-//                intent.putExtra("showSelect", true);    //是否保存图片
-//                intent.addCategory(getPackageName());               //调用demo中的扫描界面使用: com.tomcat.ocr.idcard
-//                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -58,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
 
     private final int REQUEST_CODE = 1;
@@ -83,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(String.format("有效期限 = %s\n", jo.opt("valid")));
                 sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
                 sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
+                sb.append("\n驾照专属字段\n");
+                sb.append(String.format("国家 = %s\n", jo.opt("nation")));
+                sb.append(String.format("初始领证 = %s\n", jo.opt("startTime")));
+                sb.append(String.format("准驾车型 = %s\n", jo.opt("drivingType")));
+                sb.append(String.format("有效期限 = %s\n", jo.opt("registerDate")));
                 binding.textview.setText(sb.toString());
             } catch (JSONException e) {
                 e.printStackTrace();

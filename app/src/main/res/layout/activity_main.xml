@@ -17,28 +17,24 @@
             android:layout_height="wrap_content"
             android:autoLink="all"
             android:lineSpacingMultiplier="1.5"
-            android:text="本示例仅识别中国二代身份证信息正反面。技术支持：https://github.com/XieZhiFa/IdCardOCR"
+            android:text="本示例仅识别中国二代身份正反面及驾驶证信息。技术支持：https://github.com/XieZhiFa/IdCardOCR"
             android:textIsSelectable="true"/>
 
-        <RadioGroup
+        <Spinner
+            android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:padding="10dp"
+            android:entries="@array/types"/>
 
-            <RadioButton
-                android:id="@+id/saveImage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="保存识别图片"/>
-
-            <RadioButton
-                android:id="@+id/saveImage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不保存识别图"/>
-
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/saveImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:entries="@array/saveImage"/>
 
         <Button
             android:id="@+id/button"
