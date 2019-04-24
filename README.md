@@ -11,21 +11,27 @@
 
 
 #### 调用扫描界面
-    //如果您已经集成了aar那么可以直接转跳到扫描界面
     Bundle bundle = new Bundle();
-    bundle.putBoolean("saveImage", false);//是否保存识别图片
-    bundle.putBoolean("showSelect", true);//是否显示选择图片
-    bundle.putInt("requestCode", REQUEST_CODE);//requestCode
-    LibraryInitOCR.startScan(context, bundle);
+    bundle.putBoolean("saveImage",
+    binding.saveImage.getSelectedItemPosition() == 0 ? true : false); //
+    是否保存识别图片 bundle.putBoolean("showSelect", true); //
+    是否显示选择图片 bundle.putBoolean("showCamera", true); //
+    显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
+    bundle.putInt("requestCode", REQUEST_CODE); // requestCode
+    bundle.putInt("type", binding.type.getSelectedItemPosition()); //
+    0身份证, 1驾驶证 LibraryInitOCR.startScan(context, bundle);
+
     
-    
-    //如果您不想集成aar,那么可以通过隐式意图拉起示例中的扫描界面
-	boolean isSave = binding.tip.getVisibility() == View.GONE;
-    Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
-    intent.putExtra("saveImage", isSave);//是否保存图片
-    intent.putExtra("showSelect", true);//是否保存图片
-    intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
-    startActivityForResult(intent, REQUEST_CODE);
+    //如果您不想集成aar, 那么可以通过隐式意图拉起示例中的扫描界面 boolean
+    isSave = binding.tip.getVisibility() == View.GONE; Intent intent =
+    new Intent("com.msd.ocr.idcard.ICVideo");
+    //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证:
+    com.msd.ocr.idcard.id.DIVideoActivity intent.putExtra("saveImage",
+    isSave);//是否保存图片 intent.putExtra("showSelect",
+    true);//是否显示选择图片 bundle.putBoolean("showCamera", true);//
+    显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
+    intent.addCategory(getPackageName());//调用demo中的扫描界面使用:
+    com.tomcat.ocr.idcard startActivityForResult(intent, REQUEST_CODE);
 	
 	//两种方式,返回的结果都是一样的. 但是选择图片的时候头像暂时不能提前.
 
@@ -37,8 +43,8 @@
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
-          String result = data.getStringExtra("OCRResult");
-          try {
+            String result = data.getStringExtra("OCRResult");
+            try {
                 JSONObject jo = new JSONObject(result);
                 StringBuffer sb = new StringBuffer();
                 sb.append(String.format("正面 = %s\n", jo.opt("type")));
@@ -52,11 +58,16 @@
                 sb.append(String.format("有效期限 = %s\n", jo.opt("valid")));
                 sb.append(String.format("整体照片 = %s\n", jo.opt("imgPath")));
                 sb.append(String.format("头像路径 = %s\n", jo.opt("headPath")));
-                textview.setText(sb.toString());
+                sb.append("\n驾照专属字段\n");
+                sb.append(String.format("国家 = %s\n", jo.opt("nation")));
+                sb.append(String.format("初始领证 = %s\n", jo.opt("startTime")));
+                sb.append(String.format("准驾车型 = %s\n", jo.opt("drivingType")));
+                sb.append(String.format("有效期限 = %s\n", jo.opt("registerDate")));
+                binding.textview.setText(sb.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-	    }
+        }
     }
 
 
@@ -83,7 +94,7 @@
 
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
-        implementation (name: 'library-ocr-1.0.3-SNAPSHOT', ext: 'aar')
+        implementation (name: 'library-ocr-1.0.4-SNAPSHOT', ext: 'aar')
         
         //使用OCR aar包 图片选择需要依赖另外一个库
         implementation 'com.squareup.picasso:picasso:2.4.0'
@@ -209,8 +220,9 @@
 
 
 
-#### 身份证示例图
+#### 证示例图
 对着电脑扫描识别率会比较低, 建议使用身份证原件做测试.<br/><br/>
 ![身份证示例图](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/%E7%A4%BA%E4%BE%8B%E8%BA%AB%E4%BB%BD%E8%AF%81.png?raw=true)
+![身份证示例图](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/%e7%a4%ba%e4%be%8b%e9%a9%be%e7%85%a7.jpg?raw=true)
 
 
