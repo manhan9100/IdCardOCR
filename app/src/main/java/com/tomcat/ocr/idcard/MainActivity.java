@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 boolean isSave = binding.tip.getVisibility() == View.GONE;
                 Intent intent = new Intent("com.msd.ocr.idcard.ICVideo"); //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证: com.msd.ocr.idcard.id.DIVideoActivity
                 intent.putExtra("saveImage", isSave);//是否保存图片
-                intent.putExtra("showSelect", true);//是否保存图片
+                intent.putExtra("showSelect", true);//是否显示选择图片
+                bundle.putBoolean("showCamera", true);// 显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
                 intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
                 startActivityForResult(intent, REQUEST_CODE);
                 */
