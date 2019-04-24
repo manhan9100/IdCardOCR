@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("saveImage", binding.saveImage.getSelectedItemPosition() == 0 ? true : false); // 是否保存识别图片
                 bundle.putBoolean("showSelect", true);                          // 是否显示选择图片
+                bundle.putBoolean("showCamera", true);                          // 显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
                 bundle.putInt("requestCode", REQUEST_CODE);                     // requestCode
                 bundle.putInt("type", binding.type.getSelectedItemPosition());  // 0身份证, 1驾驶证
                 LibraryInitOCR.startScan(context, bundle);
