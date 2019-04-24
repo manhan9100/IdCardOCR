@@ -36,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putInt("requestCode", REQUEST_CODE);                     // requestCode
                 bundle.putInt("type", binding.type.getSelectedItemPosition());  // 0身份证, 1驾驶证
                 LibraryInitOCR.startScan(context, bundle);
+
+                /*
+                //如果您不想集成aar, 那么可以通过隐式意图拉起示例中的扫描界面
+                boolean isSave = binding.tip.getVisibility() == View.GONE;
+                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo"); //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证: com.msd.ocr.idcard.id.DIVideoActivity
+                intent.putExtra("saveImage", isSave);//是否保存图片
+                intent.putExtra("showSelect", true);//是否保存图片
+                intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
+                startActivityForResult(intent, REQUEST_CODE);
+                */
             }
         });
 
