@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.msd.ocr.idcard.LibraryInitOCR;
-import com.msd.ocr.idcard.permissions.EasyPermission;
 import com.tomcat.ocr.idcard.databinding.ActivityMainBinding;
+import com.tomcat.ocr.idcard.permissions.EasyPermission;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
         });
 
 
+        //扫描之前,提前申请权限..
         requestPermission();
     }
 
