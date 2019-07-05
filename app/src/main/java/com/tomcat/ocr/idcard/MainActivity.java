@@ -1,19 +1,24 @@
 package com.tomcat.ocr.idcard;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.msd.ocr.idcard.LibraryInitOCR;
+import com.msd.ocr.idcard.permissions.EasyPermission;
 import com.tomcat.ocr.idcard.databinding.ActivityMainBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements EasyPermission.PermissionCallback {
     private Context context;
     private ActivityMainBinding binding;
 
@@ -60,9 +65,41 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        binding.button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, SimpleCameraActivity.class));
+            }
+        });
+
+
+        requestPermission();
+    }
+
+
+    String[] permissions = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+    };
+
+    private boolean isHavePermission = true;
+    private void requestPermission(){
+        if(EasyPermission.hasPermissions(context, permissions)){
+            isHavePermission = true;
+        }else{
+            EasyPermission.with(this)
+                    .rationale(getString(com.msd.ocr.idcard.R.string.rationale_camera))
+                    .addRequestCode(REQUEST_PERMISS)
+                    .permissions(permissions)
+                    .request();
+        }
     }
 
     private final int REQUEST_CODE = 1;
+    private final int REQUEST_PERMISS = 2;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -95,4 +132,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onPermissionGranted(int requestCode, List<String> perms) {
+        isHavePermission = true;
+    }
+
+    @Override
+    public void onPermissionDenied(int requestCode, List<String> perms) {
+        Toast.makeText(context, "没有相机权限", Toast.LENGTH_SHORT).show();
+    }
 }

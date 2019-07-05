@@ -19,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".SimpleCameraActivity"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:screenOrientation="landscape"
+                  android:theme="@style/ScanThemeTranslucent">
+
+        </activity>
     </application>
 
 </manifest>
