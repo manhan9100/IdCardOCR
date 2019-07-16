@@ -31,7 +31,7 @@
     intent.addCategory(getPackageName());//调用demo中的扫描界面使用:
     com.tomcat.ocr.idcard startActivityForResult(intent, REQUEST_CODE);
 	
-	//两种方式,返回的结果都是一样的. 但是选择图片的时候头像暂时不能提前.
+	//两种方式,返回的结果都是一样的. 但是选择图片的时候头像暂时不能提取.
 
 
 #### 返回结果
