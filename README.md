@@ -210,18 +210,17 @@
     
 
 
-
 #### 技术支持 QQ:2227421573
     正式授权收取一点经费用于维护本项目。
     如果您不想付费，可以将代码挪到本项目来运行。
     授权密钥请将applicationId及正式包sha1发给我，我给你License。
-    **注意: 一个License只绑定一个APP**
+    **注意: 一个License只绑定一个applicationId 多渠道打包需要注意**
+    
     
     sha1 查看方式: 
     命令行进入签名文件所在的目录执行:
     keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码 
     
-
 
 
 
