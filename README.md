@@ -220,7 +220,7 @@
     sha1 查看方式: 
     命令行进入签名文件所在的目录执行:
     keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码 
-    
+![索要授权密钥](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/pay.png?raw=true)
 
 
 
