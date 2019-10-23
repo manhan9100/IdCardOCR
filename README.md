@@ -1,7 +1,7 @@
 #### 项目说明
 极速识别中国二代身份证(无需联网，离线秒扫，极速识别)身份证所有信息, 包含
 姓名、性别、出生年月、详细地址，正反面。
-本应用使用相机进行识别中国二代身份证信息正反面,也可以选择相册中的图片,(OCR库还支持驾驶证、护照、军官证这三个证扫描功能目前还没有集成进来,有需要的话可以与我联系)
+本应用使用相机进行识别中国二代身份证信息正反面,也可以选择相册中的图片
 不需要联网即可离线识别身份证所有信息包括新疆少数民族身份证，全网仅此一个，识别速度快，识别率高,
 可保存识别图片。 </br>
 
@@ -85,6 +85,7 @@
 
         manifestPlaceholders = [
             //debug.keystore生成, 正式包需要重新生成.
+            //**注意: 一个KEY只绑定一个applicationId 多渠道打包需要注意**
             "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    
         ]
         ndk {
@@ -176,18 +177,8 @@
     
 
 #### 混淆排除
-    #排除身份证识别库本地方法
-    -keep class com.ym.idcard.reg.** {*;}
-    -keep class com.ym.ocr.img.** {*;}
-    -keep class hotcard.doc.reader.** {*;}
-    -keep class com.msd.ocr.idcard.LibraryInitOCR {*;}
-    
-    -keepclassmembers class * {
-        native <methods>;
-    }
-    -keepclasseswithmembernames class * {
-        native <methods>;
-    }
+    已经自动管理混淆,不需要再单独设置混淆排除了
+
 
 
 #### 更新日志
@@ -213,18 +204,10 @@
 
 
 #### 技术支持 QQ:2227421573
-    正式授权收取一点经费用于维护本项目。
-    如果您不想付费，可以将代码挪到本项目来运行。
-    授权密钥请将applicationId及正式包sha1发给我，我给你License。
-    **注意: 一个License只绑定一个applicationId 多渠道打包需要注意**
-    请不要再问我要源代码：so库是在特定的环境下编译出来的, 源代码给你也编译不了。
-    请不要再问我有没有限制：识别库是离线识别、离线认证，永久使用，没有任何限制。
-    
-    
+    授权密钥请将applicationId及正式包sha1发给我，我给你KEY.
     sha1 查看方式: 
     命令行进入签名文件所在的目录执行:
-    keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码 
-![索要授权密钥](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/pay.png?raw=true)
+    keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码
 
 
 
