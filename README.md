@@ -14,26 +14,29 @@
 
 #### 调用扫描界面
     Bundle bundle = new Bundle();
-    bundle.putBoolean("saveImage",
-    binding.saveImage.getSelectedItemPosition() == 0 ? true : false); //是否保存识别图片 
-	bundle.putBoolean("showSelect", true); //是否显示选择图片 
-	bundle.putBoolean("showCamera", true); //显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
-    bundle.putInt("requestCode", REQUEST_CODE); // requestCode
-    bundle.putInt("type", binding.type.getSelectedItemPosition()); //0身份证, 1驾驶证 
-	LibraryInitOCR.startScan(context, bundle);
+    bundle.putBoolean("saveImage", binding.saveImage.getSelectedItemPosition() == 0 ? true : false); // 是否保存识别图片
+    bundle.putBoolean("showSelect", true);                          // 是否显示选择图片
+    bundle.putBoolean("showCamera", true);                          // 显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
+    bundle.putInt("requestCode", REQUEST_CODE);                     // requestCode
+    bundle.putInt("type", binding.type.getSelectedItemPosition());  // 0身份证, 1驾驶证
 
-    
-    //如果您不想集成aar, 那么可以通过隐式意图拉起示例中的扫描界面 
-	boolean isSave = binding.tip.getVisibility() == View.GONE; 
-	//身份证:com.msd.ocr.idcard.ICVideo, 驾驶证:com.msd.ocr.idcard.id.DIVideoActivity 
-	Intent intent = new Intent("com.msd.ocr.idcard.ICVideo"); 
-	intent.putExtra("saveImage",isSave);//是否保存图片
-	intent.putExtra("showSelect",true);//是否显示选择图片
-	bundle.putBoolean("showCamera", true);//显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
-    intent.addCategory(getPackageName());//调用demo中的扫描界面使用:
-    com.tomcat.ocr.idcard startActivityForResult(intent, REQUEST_CODE);
+    //broadcastAction 将扫描结果广播出去, 注意增加 intent.addCategory(context.getPackageName());
+    //如果不需要广播,就不会传这个参数
+    bundle.putString("broadcastAction", broadcastAction);
+    LibraryInitOCR.startScan(context, bundle);
+
+
+    //如果您不想集成aar, 那么可以通过隐式意图拉起示例中的扫描界面
+
+    /*
+    //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证: com.msd.ocr.idcard.id.DIVideoActivity
+    Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
+    intent.putExtra("bundle", bundle);                         //具体参数如上
+    intent.addCategory(getPackageName());                      //调用demo中的扫描界面使用: com.tomcat.ocr.idcard
+    startActivityForResult(intent, REQUEST_CODE);
+     */
 	
-	//两种方式,返回的结果都是一样的. 但是选择图片的时候头像暂时不能提取.
+	//返回的结果都是一样的. 但是选择图片的时候头像暂时不能提取.
 
 
 #### 返回结果
@@ -200,6 +203,11 @@
     1.0.4 
     1. 增加自定义扫描框调用示例.
     2. 自定义扫描Handler 不回调等优化.
+
+    1.0.5
+    1. 增加通过广播来返回数据.
+    2. 统一用LibraryInitOCR.startScan(context, bundle);启动扫描界面.
+    3. 代理混淆自动管理.
     
 
 

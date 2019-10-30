@@ -21,7 +21,7 @@ allprojects {
         mavenLocal()
         google()
         jcenter()
-        maven { url "http://122.112.234.205:8090/nexus/content/groups/public" }
+
     }
 
     tasks.withType(Javadoc) {

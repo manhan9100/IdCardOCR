@@ -1,8 +1,10 @@
 package com.tomcat.ocr.idcard;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements EasyPermission.PermissionCallback {
     private Context context;
     private ActivityMainBinding binding;
-
+    private String broadcastAction = "com.idCard.result";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +43,22 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
                 bundle.putBoolean("showCamera", true);                          // 显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
                 bundle.putInt("requestCode", REQUEST_CODE);                     // requestCode
                 bundle.putInt("type", binding.type.getSelectedItemPosition());  // 0身份证, 1驾驶证
+
+                //broadcastAction 将扫描结果广播出去, 注意增加 intent.addCategory(context.getPackageName());
+                //如果不需要广播,就不会传这个参数
+                bundle.putString("broadcastAction", broadcastAction);
                 LibraryInitOCR.startScan(context, bundle);
 
-                /*
+
                 //如果您不想集成aar, 那么可以通过隐式意图拉起示例中的扫描界面
-                boolean isSave = binding.tip.getVisibility() == View.GONE;
-                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo"); //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证: com.msd.ocr.idcard.id.DIVideoActivity
-                intent.putExtra("saveImage", isSave);//是否保存图片
-                intent.putExtra("showSelect", true);//是否显示选择图片
-                bundle.putBoolean("showCamera", true);// 显示图片界面是否显示拍照(驾照选择图片识别率比扫描高)
-                intent.addCategory(getPackageName());//调用demo中的扫描界面使用: com.tomcat.ocr.idcard
+
+                /*
+                //身份证:com.msd.ocr.idcard.ICVideo, 驾驶证: com.msd.ocr.idcard.id.DIVideoActivity
+                Intent intent = new Intent("com.msd.ocr.idcard.ICVideo");
+                intent.putExtra("bundle", bundle);                         //具体参数如上
+                intent.addCategory(getPackageName());                      //调用demo中的扫描界面使用: com.tomcat.ocr.idcard
                 startActivityForResult(intent, REQUEST_CODE);
-                */
+                 */
             }
         });
 
@@ -77,6 +83,27 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
 
         //扫描之前,提前申请权限..
         requestPermission();
+
+
+
+        //注册扫描广播
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(broadcastAction);
+        intentFilter.addCategory(getPackageName());
+        resultReceiver = new ResultReceiver();
+        registerReceiver(resultReceiver, intentFilter);
+    }
+
+    private ResultReceiver resultReceiver;
+    private class ResultReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(broadcastAction.equals(intent.getAction())){
+                String result = intent.getStringExtra("OCRResult");
+                Toast.makeText(context, "从广播中接收到数据: " + result, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 
@@ -141,5 +168,11 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
     @Override
     public void onPermissionDenied(int requestCode, List<String> perms) {
         Toast.makeText(context, "没有相机权限", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(resultReceiver); //记得要注销
     }
 }
