@@ -212,7 +212,8 @@
 
 
 #### 技术支持 QQ:2227421573
-    授权密钥请将applicationId及正式包sha1发给我，我给你KEY.
+    授权密钥请扫描码(image/pay.png)
+    并将applicationId及正式包sha1发给我，我给你KEY.
     sha1 查看方式: 
     命令行进入签名文件所在的目录执行:
     keytool -list  -v -keystore 签名文件.keystore -storepass 签名文件密码
