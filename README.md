@@ -92,7 +92,7 @@
             "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    
         ]
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'arm64-v8a'
         }
     }
 
@@ -208,10 +208,14 @@
     1. 增加通过广播来返回数据.
     2. 统一用LibraryInitOCR.startScan(context, bundle);启动扫描界面.
     3. 代理混淆自动管理.
+
+    1.0.6
+    1. 增加 arm64-v8a so库。
     
 
 
 #### 技术支持 QQ:2227421573
+    如果只用到身份证识别，可以将驾驶证的so库删除掉，并只使用 armeabi-v7a arm64-v8a 两个架构
     授权密钥请扫描码(image/pay.png)
     并将applicationId及正式包sha1发给我，我给你KEY.
     sha1 查看方式: 
