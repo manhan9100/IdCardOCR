@@ -92,18 +92,20 @@
             "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    
         ]
         ndk {
-            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'arm64-v8a'
+            //abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'arm64-v8a'
+
+            //armeabi x86 基本上已经是淘汰了, Android11 以上版本请使用这两个架构的ABI
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
     }
 
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
-        implementation (name: 'library-ocr-1.0.4-SNAPSHOT', ext: 'aar')
+        implementation (name: 'library-ocr-1.0.7-SNAPSHOT', ext: 'aar')
         
         //使用OCR aar包 图片选择需要依赖另外一个库
         implementation 'com.squareup.picasso:picasso:2.4.0'
         implementation(name: 'library-multi-image-selector-1.0.5-SNAPSHOT', ext: 'aar')
-        
     }
 
 
@@ -211,6 +213,9 @@
 
     1.0.6
     1. 增加 arm64-v8a so库。
+
+    1.0.7
+    1. 修复Android 11 版本手机, 初始化卡死问题.
     
 
 
@@ -224,7 +229,7 @@
 
 
 
-#### 证示例图
+#### 证示例图 (国内网络问题可能无法预览图片)
 对着电脑扫描识别率会比较低, 建议使用身份证原件做测试.<br/><br/>
 ![身份证示例图](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/%E7%A4%BA%E4%BE%8B%E8%BA%AB%E4%BB%BD%E8%AF%81.png?raw=true)
 ![身份证示例图](https://github.com/XieZhiFa/IdCardOCR/blob/master/image/%e7%a4%ba%e4%be%8b%e9%a9%be%e7%85%a7.jpg?raw=true)

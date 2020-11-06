@@ -6,15 +6,18 @@ android {
         applicationId "com.tomcat.ocr.idcard"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
 
         manifestPlaceholders = [
                 "OCR_API_KEY" : "26f1f6a0d4d7cb0dd0e9b28f4cedef83"    //OCR密钥
         ]
 
         ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'arm64-v8a'
+            //abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'arm64-v8a'
+
+            //armeabi x86 基本上已经是淘汰了, Android11 以上版本请使用这两个架构的ABI
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
     }
     buildTypes {
@@ -66,6 +69,6 @@ dependencies {
 //    //使用OCR aar包的情况下,图片选择需要依赖另外一个库
     implementation 'com.squareup.picasso:picasso:2.4.0'
     implementation(name: 'library-multi-image-selector-1.0.5-SNAPSHOT', ext: 'aar')
-    implementation(name: 'library-ocr-1.0.6-SNAPSHOT', ext: 'aar')
+    implementation(name: 'library-ocr-1.0.7-SNAPSHOT', ext: 'aar')
 //    api project(':library_ocr')
 }
