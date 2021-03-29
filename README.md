@@ -101,7 +101,7 @@
 
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
-        implementation (name: 'library-ocr-1.0.7-SNAPSHOT', ext: 'aar')
+        implementation (name: 'library-ocr-1.0.8-SNAPSHOT', ext: 'aar')
         
         //使用OCR aar包 图片选择需要依赖另外一个库
         implementation 'com.squareup.picasso:picasso:2.4.0'
@@ -217,6 +217,14 @@
     1.0.7
     1. 修复Android 11 版本手机, 初始化卡死问题.
     
+    1.0.8
+    1. 优化64位so库识别速度.
+
+
+#### 待优化点
+    由于识别库是离线版本, 国家行政地区调整后, 会导致算法处理异常, 例如部分由县级市升级为地级市的地区可能会导致识别出错. 
+    目前已收到小伙伴反馈: 
+    济南市莱芜区 会识别成 济南市长清区
 
 
 #### 技术支持 QQ:2227421573
