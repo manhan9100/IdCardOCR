@@ -101,7 +101,7 @@
 
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
-        implementation (name: 'library-ocr-1.0.8-SNAPSHOT', ext: 'aar')
+        implementation (name: 'library-ocr-1.0.9-SNAPSHOT', ext: 'aar')
         
         //使用OCR aar包 图片选择需要依赖另外一个库
         implementation 'com.squareup.picasso:picasso:2.4.0'
@@ -219,6 +219,9 @@
     
     1.0.8
     1. 优化64位so库识别速度.
+    
+    1.0.9
+    1. 优化部分身份证不识别或识别慢问题.
 
 
 #### 待优化点
